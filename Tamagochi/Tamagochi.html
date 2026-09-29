@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tamagotchi</title>
+    <link rel="stylesheet" href="Tamagochi.css">
+</head>
+<body>
+<main class="Panel">
+    <header class="Zona_superior">
+        <div class="Info_juego">
+            <div class="Identidad">
+                <span>Mi mascota</span>
+                <h1 id="NombreMascota">Tamagotchi</h1>
+            </div>
+
+            <div class="Reloj" aria-label="Reloj simulado">
+                <span aria-hidden="true">⏱️</span>
+                <div>
+                    <strong id="Hora">00:00</strong>
+                    <small>6 segundos = 1 hora</small>
+                </div>
+            </div>
+        </div>
+
+        <section class="Barra_Estados" aria-label="Estados de la mascota">
+            <article class="Estado">
+                <img src="IMGs/lleno.png" alt="Indicador de alimentación">
+                <div class="Estado_contenido">
+                    <span>Hambre</span>
+                    <strong id="TextoHambre">Satisfecho</strong>
+                    <div class="Medidor" aria-label="Hambre al 80%">
+                        <span id="NivelHambre" style="--nivel: 80%"></span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="Estado">
+                <span class="Estado_icono" aria-hidden="true">🎾</span>
+                <div class="Estado_contenido">
+                    <span>Diversión</span>
+                    <strong id="TextoDiversion">Entretenido</strong>
+                    <div class="Medidor" aria-label="Diversión al 80%">
+                        <span id="NivelDiversion" style="--nivel: 80%"></span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="Estado">
+                <img src="IMGs/limpio.png" alt="Indicador de higiene">
+                <div class="Estado_contenido">
+                    <span>Higiene</span>
+                    <strong id="TextoHigiene">Muy limpio</strong>
+                    <div class="Medidor" aria-label="Higiene al 80%">
+                        <span id="NivelHigiene" style="--nivel: 80%"></span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="Estado">
+                <img src="IMGs/feliz.png" alt="Indicador de felicidad">
+                <div class="Estado_contenido">
+                    <span>Felicidad</span>
+                    <strong id="TextoFelicidad">Muy feliz</strong>
+                    <div class="Medidor" aria-label="Felicidad al 80%">
+                        <span id="NivelFelicidad" style="--nivel: 80%"></span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </header>
+
+    <section class="Tamagochi" aria-label="Tu mascota virtual">
+        <div class="Escenario" id="Escenario">
+            <p class="Mensaje" id="Mensaje" aria-live="polite">Escribe un nombre para comenzar</p>
+            <p class="Evento oculto" id="Evento" aria-live="assertive"></p>
+            <img src="IMGs/Tama.png" alt="Tamagotchi feliz de color turquesa" id="Tama">
+            <div class="Fantasma oculto" id="Fantasma" aria-label="La mascota se convirtió en fantasma">👻</div>
+            <span class="Sombra" aria-hidden="true"></span>
+        </div>
+    </section>
+
+    <nav class="Barra_acciones" aria-label="Acciones para cuidar a la mascota">
+        <button type="button" id="Alimentar" disabled>
+            <span class="Boton_icono" aria-hidden="true">🍗</span>
+            <span>Alimentar</span>
+        </button>
+
+        <button type="button" id="Jugar" disabled>
+            <span class="Boton_icono" aria-hidden="true">🎾</span>
+            <span>Jugar</span>
+        </button>
+
+        <button type="button" id="Duchar" disabled>
+            <span class="Boton_icono" aria-hidden="true">🧼</span>
+            <span>Duchar</span>
+        </button>
+    </nav>
+</main>
+
+<div class="Modal" id="ModalInicio" role="dialog" aria-modal="true" aria-labelledby="TituloInicio">
+    <form class="Modal_tarjeta" id="FormularioInicio">
+        <span class="Modal_emoji" aria-hidden="true">🥚</span>
+        <p class="Modal_etiqueta">Nueva mascota</p>
+        <h2 id="TituloInicio">¿Cómo se llamará?</h2>
+        <label for="NombreInput">Nombre de tu Tamagotchi</label>
+        <input id="NombreInput" name="nombre" type="text" maxlength="18" placeholder="Ejemplo: Momo" required autocomplete="off">
+        <button class="Boton_principal" type="submit">Comenzar el día</button>
+        <small>El día dura 24 horas simuladas. Cada hora avanza en 6 segundos.</small>
+    </form>
+</div>
+
+<div class="Modal oculto" id="ModalResumen" role="dialog" aria-modal="true" aria-labelledby="TituloResumen">
+    <section class="Modal_tarjeta Resumen">
+        <span class="Modal_emoji" id="EmojiResultado" aria-hidden="true">🏆</span>
+        <p class="Modal_etiqueta">Resumen del día</p>
+        <h2 id="TituloResumen">¡Día completado!</h2>
+        <p id="TextoResultado"></p>
+        <dl class="Resumen_datos">
+            <div><dt>Horas</dt><dd id="ResumenHoras">0</dd></div>
+            <div><dt>Alimentos</dt><dd id="ResumenAlimentos">0</dd></div>
+            <div><dt>Juegos</dt><dd id="ResumenJuegos">0</dd></div>
+            <div><dt>Baños</dt><dd id="ResumenBanos">0</dd></div>
+            <div><dt>Eventos atendidos</dt><dd id="ResumenEventos">0</dd></div>
+            <div><dt>Felicidad final</dt><dd id="ResumenFelicidad">0%</dd></div>
+        </dl>
+        <button class="Boton_principal" id="Reiniciar" type="button">Jugar otra vez</button>
+    </section>
+</div>
+
+<script src="Tamagochi.js"></script>
+</body>
+</html>
