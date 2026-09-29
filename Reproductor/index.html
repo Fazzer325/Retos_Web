@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reproductor musical responsive con lista de canciones y controles de reproducción.">
+    <title>Air Player — Reproductor de música</title>
+    <link rel="stylesheet" href="Reproductor.css">
+    <script src="reproductor.js" defer></script>
+</head>
+<body>
+<div class="Atmosfera" aria-hidden="true">
+    <span></span>
+    <span></span>
+</div>
+
+<main class="Reproductor">
+    <header class="Cabecera">
+        <a class="Marca" href="#" aria-label="Air Player, inicio">
+            <span class="Marca_simbolo" aria-hidden="true"></span>
+            <span>AIR / PLAYER</span>
+        </a>
+
+        <div class="Cabecera_acciones">
+            <span class="Estado_sesion">Sesión local</span>
+            <button class="Boton_fantasma" type="button">Iniciar sesión</button>
+        </div>
+    </header>
+
+    <section class="Panel_izquierdo" aria-labelledby="TituloBiblioteca">
+        <div class="Encabezado_seccion">
+            <div>
+                <p class="Etiqueta">Tu biblioteca · 6 canciones</p>
+                <h1 id="TituloBiblioteca">Música para estar <em>en el aire.</em></h1>
+            </div>
+            <button class="Boton_fantasma" type="button" data-action="shuffle">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+                </svg>
+                Aleatorio
+            </button>
+        </div>
+
+        <div class="Columnas_lista" aria-hidden="true">
+            <span>#</span>
+            <span>Canción</span>
+            <span>Álbum</span>
+            <span>Duración</span>
+        </div>
+
+        <ol class="Lista_canciones" aria-label="Lista de canciones">
+            <li>
+                <button class="Cancion Cancion_activa" type="button" aria-current="true" data-track="0">
+                    <span class="Numero">01</span>
+                    <span class="Mini_portada Mini_portada--azul" aria-hidden="true"><i></i></span>
+                    <span class="Datos_cancion">
+                        <strong>Midnight Glass</strong>
+                        <small>Lumen Vale</small>
+                    </span>
+                    <span class="Album">Cloud Studies</span>
+                    <span class="Duracion">04:12</span>
+                    <span class="Indicador_sonido" aria-label="Reproduciendo"><i></i><i></i><i></i></span>
+                </button>
+            </li>
+            <li>
+                <button class="Cancion" type="button" data-track="1">
+                    <span class="Numero">02</span>
+                    <span class="Mini_portada Mini_portada--humo" aria-hidden="true"><i></i></span>
+                    <span class="Datos_cancion">
+                        <strong>Cloudline</strong>
+                        <small>Orin Grey</small>
+                    </span>
+                    <span class="Album">Open Skies</span>
+                    <span class="Duracion">03:48</span>
+                    <span class="Accion_cancion" aria-hidden="true">•••</span>
+                </button>
+            </li>
+            <li>
+                <button class="Cancion" type="button" data-track="2">
+                    <span class="Numero">03</span>
+                    <span class="Mini_portada Mini_portada--claro" aria-hidden="true"><i></i></span>
+                    <span class="Datos_cancion">
+                        <strong>Afterglow</strong>
+                        <small>Nora Field</small>
+                    </span>
+                    <span class="Album">Soft Geometry</span>
+                    <span class="Duracion">05:06</span>
+                    <span class="Accion_cancion" aria-hidden="true">•••</span>
+                </button>
+            </li>
+            <li>
+                <button class="Cancion" type="button" data-track="3">
+                    <span class="Numero">04</span>
+                    <span class="Mini_portada Mini_portada--tinta" aria-hidden="true"><i></i></span>
+                    <span class="Datos_cancion">
+                        <strong>Still Moving</strong>
+                        <small>North/West</small>
+                    </span>
+                    <span class="Album">Quiet Motion</span>
+                    <span class="Duracion">03:31</span>
+                    <span class="Accion_cancion" aria-hidden="true">•••</span>
+                </button>
+            </li>
+            <li>
+                <button class="Cancion" type="button" data-track="4">
+                    <span class="Numero">05</span>
+                    <span class="Mini_portada Mini_portada--blanco" aria-hidden="true"><i></i></span>
+                    <span class="Datos_cancion">
+                        <strong>White Noise</strong>
+                        <small>Aster Club</small>
+                    </span>
+                    <span class="Album">Frequency</span>
+                    <span class="Duracion">04:27</span>
+                    <span class="Accion_cancion" aria-hidden="true">•••</span>
+                </button>
+            </li>
+            <li>
+                <button class="Cancion" type="button" data-track="5">
+                    <span class="Numero">06</span>
+                    <span class="Mini_portada Mini_portada--noche" aria-hidden="true"><i></i></span>
+                    <span class="Datos_cancion">
+                        <strong>Last Light</strong>
+                        <small>Velvet Hours</small>
+                    </span>
+                    <span class="Album">Blue Evening</span>
+                    <span class="Duracion">04:54</span>
+                    <span class="Accion_cancion" aria-hidden="true">•••</span>
+                </button>
+            </li>
+        </ol>
+    </section>
+
+    <aside class="Panel_derecho" aria-labelledby="TituloActual">
+        <div class="Panel_derecho_cabecera">
+            <p class="Etiqueta">Reproduciendo ahora</p>
+            <button class="Boton_icono" type="button" aria-label="Guardar en favoritos" data-action="favorite">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="Portada" role="img" aria-label="Portada abstracta de Midnight Glass">
+            <span class="Portada_orbita"></span>
+            <span class="Portada_esfera"></span>
+            <span class="Portada_nombre">AIR</span>
+            <small>Cloud Studies · 2026</small>
+        </div>
+
+        <div class="Informacion_actual">
+            <p class="Etiqueta">Cloud Studies</p>
+            <h2 id="TituloActual">Midnight Glass</h2>
+            <p>Lumen Vale</p>
+        </div>
+
+        <dl class="Metadatos">
+            <div><dt>Año</dt><dd>2026</dd></div>
+            <div><dt>Género</dt><dd>Ambient</dd></div>
+            <div><dt>Duración</dt><dd>04:12</dd></div>
+        </dl>
+    </aside>
+
+    <nav class="Barra_Musica" aria-label="Controles del reproductor">
+        <div class="Cancion_compacta">
+            <span class="Mini_portada Mini_portada--azul" aria-hidden="true"><i></i></span>
+            <span>
+                <strong>Midnight Glass</strong>
+                <small>Lumen Vale</small>
+            </span>
+        </div>
+
+        <div class="Controles_centrales">
+            <div class="Botones_reproduccion">
+                <button class="Boton_control" type="button" aria-label="Canción anterior" data-action="previous">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 20 9 12l10-8v16ZM5 19V5"/></svg>
+                </button>
+                <button class="Boton_reproducir" type="button" aria-label="Reproducir" data-action="play" data-playing="false">
+                    <svg class="Icono_play" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>
+                    <svg class="Icono_pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+                </button>
+                <button class="Boton_control" type="button" aria-label="Canción siguiente" data-action="next">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 4 10 8-10 8V4Zm14 1v14"/></svg>
+                </button>
+            </div>
+
+            <div class="Progreso">
+                <time id="TiempoActual" datetime="PT1M24S">01:24</time>
+                <label class="Solo_lectores" for="BarraProgreso">Progreso de la canción</label>
+                <input id="BarraProgreso" type="range" min="0" max="252" value="84" aria-valuetext="1 minuto 24 segundos de 4 minutos 12 segundos">
+                <time id="TiempoTotal" datetime="PT4M12S">04:12</time>
+            </div>
+        </div>
+
+        <div class="Volumen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Zm4.5 3.5a5 5 0 0 1 0 7M18 6a8 8 0 0 1 0 12"/></svg>
+            <label class="Solo_lectores" for="ControlVolumen">Volumen</label>
+            <input id="ControlVolumen" type="range" min="0" max="100" value="72">
+        </div>
+
+        <audio id="Audio" preload="metadata"></audio>
+    </nav>
+</main>
+</body>
+</html>

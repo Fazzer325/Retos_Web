@@ -1,0 +1,925 @@
+:root {
+    --color-whiteout: #ffffff;
+    --color-haze: #f5f5f5;
+    --color-ink: #1b1b1b;
+    --color-black-void: #000000;
+    --color-twilight-blue: #426188;
+    --color-signal-blue: #2b7fff;
+    --color-line: rgba(255, 255, 255, 0.16);
+    --color-muted: rgba(255, 255, 255, 0.58);
+    --font-control: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --radius-inputs: 4px;
+    --radius-buttons: 8px;
+    --radius-cards: 12px;
+    --page-max-width: 1440px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: dark;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    overflow: hidden;
+    color: var(--color-whiteout);
+    font-family: var(--font-control);
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--color-black-void);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button,
+a,
+input[type="range"] {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    color: inherit;
+}
+
+svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.Atmosfera {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: #050608;
+}
+
+.Atmosfera span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.58;
+}
+
+.Atmosfera span:first-child {
+    top: -20%;
+    left: 8%;
+    width: 56vw;
+    height: 56vw;
+    background: #263d5b;
+}
+
+.Atmosfera span:last-child {
+    right: -12%;
+    bottom: -28%;
+    width: 48vw;
+    height: 48vw;
+    background: #3d4856;
+}
+
+.Reproductor {
+    width: min(var(--page-max-width), calc(100% - 32px));
+    height: calc(100vh - 32px);
+    height: calc(100svh - 32px);
+    margin: 16px auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.75fr);
+    grid-template-rows: 72px minmax(0, 1fr) auto;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-cards);
+    background: rgba(0, 0, 0, 0.76);
+    backdrop-filter: blur(36px);
+}
+
+.Cabecera {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid var(--color-line);
+}
+
+.Marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-whiteout);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+}
+
+.Marca_simbolo {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    display: block;
+    border: 1px solid var(--color-whiteout);
+    border-radius: 50%;
+}
+
+.Marca_simbolo::before,
+.Marca_simbolo::after {
+    position: absolute;
+    content: "";
+    background: var(--color-whiteout);
+}
+
+.Marca_simbolo::before {
+    top: 11px;
+    left: 4px;
+    width: 15px;
+    height: 1px;
+}
+
+.Marca_simbolo::after {
+    top: 4px;
+    left: 11px;
+    width: 1px;
+    height: 15px;
+}
+
+.Cabecera_acciones {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.Estado_sesion {
+    color: var(--color-muted);
+    font-size: 13px;
+}
+
+.Boton_fantasma {
+    min-height: 40px;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: var(--radius-buttons);
+    cursor: pointer;
+    background: transparent;
+    transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.Boton_fantasma svg {
+    width: 18px;
+    height: 18px;
+}
+
+.Boton_fantasma:hover {
+    color: var(--color-ink);
+    border-color: var(--color-haze);
+    background: var(--color-haze);
+}
+
+.Panel_izquierdo {
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(24px, 3vw, 44px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+
+.Encabezado_seccion {
+    margin-bottom: 32px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.Etiqueta {
+    margin: 0 0 8px;
+    color: var(--color-muted);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.Encabezado_seccion h1 {
+    max-width: 720px;
+    margin: 0;
+    font-size: clamp(34px, 4.2vw, 58px);
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+}
+
+.Encabezado_seccion h1 em {
+    display: inline-block;
+    color: var(--color-twilight-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+}
+
+.Columnas_lista {
+    padding: 0 16px 10px;
+    display: grid;
+    grid-template-columns: 34px minmax(220px, 1.5fr) minmax(120px, 0.75fr) 72px;
+    gap: 12px;
+    color: var(--color-muted);
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.Columnas_lista span:last-child {
+    text-align: right;
+}
+
+.Lista_canciones {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    list-style: none;
+}
+
+.Cancion {
+    width: 100%;
+    min-width: 0;
+    min-height: 76px;
+    padding: 10px 16px;
+    display: grid;
+    grid-template-columns: 34px 52px minmax(155px, 1.5fr) minmax(110px, 0.75fr) 58px 22px;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-buttons);
+    text-align: left;
+    cursor: pointer;
+    background: transparent;
+    transition: border-color 160ms ease, background 160ms ease;
+}
+
+.Cancion:hover {
+    border-color: var(--color-line);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.Cancion_activa {
+    color: var(--color-ink);
+    border-color: var(--color-haze);
+    background: var(--color-haze);
+}
+
+.Numero,
+.Album,
+.Duracion,
+.Accion_cancion {
+    color: var(--color-muted);
+    font-size: 13px;
+}
+
+.Cancion_activa .Numero,
+.Cancion_activa .Album,
+.Cancion_activa .Duracion {
+    color: rgba(27, 27, 27, 0.58);
+}
+
+.Duracion,
+.Accion_cancion {
+    text-align: right;
+}
+
+.Mini_portada {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    display: block;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 11px;
+    background: #1f2935;
+}
+
+.Mini_portada i {
+    position: absolute;
+    top: 11px;
+    left: 13px;
+    width: 28px;
+    height: 28px;
+    display: block;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+}
+
+.Mini_portada--azul {
+    color: #ffffff;
+    background: #426188;
+}
+
+.Mini_portada--humo {
+    color: #8ea2b9;
+    background: #202326;
+}
+
+.Mini_portada--claro {
+    color: #1b1b1b;
+    background: #d8dde2;
+}
+
+.Mini_portada--tinta {
+    color: #426188;
+    background: #0b0b0c;
+}
+
+.Mini_portada--blanco {
+    color: #426188;
+    background: #f5f5f5;
+}
+
+.Mini_portada--noche {
+    color: #ffffff;
+    background: #18263a;
+}
+
+.Datos_cancion {
+    min-width: 0;
+    display: block;
+}
+
+.Datos_cancion strong,
+.Datos_cancion small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.Datos_cancion strong {
+    margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.Datos_cancion small {
+    color: var(--color-muted);
+    font-size: 13px;
+}
+
+.Cancion_activa .Datos_cancion small {
+    color: rgba(27, 27, 27, 0.58);
+}
+
+.Indicador_sonido {
+    height: 18px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    gap: 2px;
+}
+
+.Indicador_sonido i {
+    width: 2px;
+    display: block;
+    background: var(--color-ink);
+    animation: sonido 800ms ease-in-out infinite alternate;
+}
+
+.Indicador_sonido i:nth-child(1) {
+    height: 8px;
+}
+
+.Indicador_sonido i:nth-child(2) {
+    height: 15px;
+    animation-delay: 200ms;
+}
+
+.Indicador_sonido i:nth-child(3) {
+    height: 11px;
+    animation-delay: 400ms;
+}
+
+.Panel_derecho {
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(20px, 2.4vw, 32px);
+    overflow-y: auto;
+    border-left: 1px solid var(--color-line);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.Panel_derecho_cabecera {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.Panel_derecho_cabecera .Etiqueta {
+    margin: 0;
+}
+
+.Boton_icono,
+.Boton_control,
+.Boton_reproducir {
+    display: inline-grid;
+    place-items: center;
+    border-radius: var(--radius-buttons);
+    cursor: pointer;
+}
+
+.Boton_icono {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-line);
+    background: transparent;
+}
+
+.Boton_icono:hover,
+.Boton_control:hover {
+    color: var(--color-ink);
+    background: var(--color-haze);
+}
+
+.Portada {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 11px;
+    color: var(--color-ink);
+    background: var(--color-haze);
+}
+
+.Portada_orbita {
+    position: absolute;
+    top: 13%;
+    left: 11%;
+    width: 76%;
+    height: 76%;
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+    transform: rotate(-18deg) scaleY(0.42);
+}
+
+.Portada_esfera {
+    position: absolute;
+    top: 25%;
+    left: 26%;
+    width: 48%;
+    height: 48%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    background: var(--color-twilight-blue);
+    filter: blur(1px);
+}
+
+.Portada_nombre {
+    position: absolute;
+    right: -3%;
+    bottom: 7%;
+    font-size: clamp(76px, 9vw, 128px);
+    font-weight: 900;
+    letter-spacing: -0.1em;
+    line-height: 0.72;
+}
+
+.Portada small {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.Informacion_actual {
+    padding: 24px 0 20px;
+    border-bottom: 1px solid var(--color-line);
+}
+
+.Informacion_actual h2 {
+    margin: 0 0 6px;
+    font-size: clamp(26px, 2.4vw, 36px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+}
+
+.Informacion_actual > p:last-child {
+    margin: 0;
+    color: var(--color-muted);
+}
+
+.Metadatos {
+    margin: 0;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.Metadatos dt {
+    margin-bottom: 5px;
+    color: var(--color-muted);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.Metadatos dd {
+    margin: 0;
+    font-size: 13px;
+}
+
+.Barra_Musica {
+    grid-column: 1 / -1;
+    min-width: 0;
+    min-height: 112px;
+    padding: 16px 24px;
+    display: grid;
+    grid-template-columns: minmax(190px, 0.72fr) minmax(320px, 1.5fr) minmax(130px, 0.55fr);
+    align-items: center;
+    gap: 28px;
+    border-top: 1px solid var(--color-line);
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(24px);
+}
+
+.Cancion_compacta {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.Cancion_compacta .Mini_portada {
+    flex: 0 0 auto;
+}
+
+.Cancion_compacta > span:last-child {
+    min-width: 0;
+}
+
+.Cancion_compacta strong,
+.Cancion_compacta small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.Cancion_compacta strong {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.Cancion_compacta small {
+    color: var(--color-muted);
+    font-size: 12px;
+}
+
+.Controles_centrales {
+    min-width: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.Botones_reproduccion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Boton_control {
+    width: 38px;
+    height: 38px;
+    border: 1px solid transparent;
+    background: transparent;
+}
+
+.Boton_reproducir {
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    background: var(--color-haze);
+}
+
+.Boton_reproducir:hover {
+    border-color: var(--color-whiteout);
+    color: var(--color-whiteout);
+    background: transparent;
+}
+
+.Icono_pausa,
+.Boton_reproducir[data-playing="true"] .Icono_play {
+    display: none;
+}
+
+.Boton_reproducir[data-playing="true"] .Icono_pausa {
+    display: block;
+}
+
+.Progreso {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 42px minmax(80px, 1fr) 42px;
+    align-items: center;
+    gap: 10px;
+}
+
+.Progreso time {
+    color: var(--color-muted);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+.Progreso time:last-child {
+    text-align: right;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 4px;
+    margin: 0;
+    appearance: none;
+    border-radius: var(--radius-inputs);
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.24);
+    accent-color: var(--color-whiteout);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    appearance: none;
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+    background: var(--color-whiteout);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+    background: var(--color-whiteout);
+}
+
+.Volumen {
+    display: grid;
+    grid-template-columns: 22px minmax(70px, 1fr);
+    align-items: center;
+    gap: 10px;
+}
+
+.Volumen svg {
+    width: 19px;
+    height: 19px;
+    color: var(--color-muted);
+}
+
+.Solo_lectores {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--color-signal-blue);
+    outline-offset: 3px;
+}
+
+@keyframes sonido {
+    from { transform: scaleY(0.45); }
+    to { transform: scaleY(1); }
+}
+
+@media (max-width: 1050px) {
+    .Reproductor {
+        grid-template-columns: minmax(0, 1fr) 310px;
+    }
+
+    .Panel_izquierdo {
+        padding-inline: 24px;
+    }
+
+    .Columnas_lista {
+        grid-template-columns: 30px minmax(180px, 1.5fr) minmax(90px, 0.7fr) 62px;
+    }
+
+    .Cancion {
+        grid-template-columns: 30px 48px minmax(130px, 1.5fr) minmax(80px, 0.7fr) 48px 18px;
+        gap: 9px;
+    }
+
+    .Mini_portada {
+        width: 48px;
+        height: 48px;
+    }
+
+    .Barra_Musica {
+        grid-template-columns: 190px minmax(300px, 1fr) 130px;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 820px) {
+    body {
+        overflow: auto;
+    }
+
+    .Reproductor {
+        height: auto;
+        min-height: calc(100svh - 24px);
+        margin-block: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .Cabecera {
+        min-height: 68px;
+        order: 0;
+    }
+
+    .Panel_derecho {
+        padding: 24px;
+        order: 1;
+        display: grid;
+        grid-template-columns: minmax(210px, 0.8fr) minmax(240px, 1fr);
+        grid-template-rows: auto auto 1fr;
+        gap: 0 28px;
+        overflow: visible;
+        border-left: 0;
+        border-bottom: 1px solid var(--color-line);
+    }
+
+    .Panel_derecho_cabecera {
+        grid-column: 1 / -1;
+    }
+
+    .Portada {
+        grid-row: 2 / span 2;
+    }
+
+    .Informacion_actual {
+        align-self: end;
+        padding-top: 20px;
+    }
+
+    .Metadatos {
+        align-self: start;
+    }
+
+    .Panel_izquierdo {
+        order: 2;
+        overflow: visible;
+    }
+
+    .Barra_Musica {
+        position: sticky;
+        z-index: 10;
+        bottom: 0;
+        order: 3;
+        grid-template-columns: 160px minmax(270px, 1fr) 110px;
+        padding-inline: 16px;
+    }
+}
+
+@media (max-width: 620px) {
+    .Reproductor {
+        width: 100%;
+        min-height: 100svh;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .Cabecera {
+        padding-inline: 16px;
+    }
+
+    .Estado_sesion {
+        display: none;
+    }
+
+    .Cabecera .Boton_fantasma {
+        min-height: 36px;
+        padding-inline: 12px;
+        font-size: 13px;
+    }
+
+    .Panel_derecho {
+        padding: 18px 16px 24px;
+        display: block;
+    }
+
+    .Panel_derecho_cabecera {
+        margin-bottom: 14px;
+    }
+
+    .Portada {
+        max-width: 430px;
+        margin: 0 auto;
+    }
+
+    .Informacion_actual {
+        padding-top: 20px;
+    }
+
+    .Panel_izquierdo {
+        padding: 32px 16px;
+    }
+
+    .Encabezado_seccion {
+        margin-bottom: 24px;
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .Encabezado_seccion h1 {
+        font-size: clamp(34px, 11vw, 48px);
+    }
+
+    .Columnas_lista {
+        display: none;
+    }
+
+    .Cancion {
+        grid-template-columns: 27px 48px minmax(0, 1fr) 45px;
+        padding-inline: 10px;
+    }
+
+    .Cancion .Album,
+    .Accion_cancion,
+    .Indicador_sonido {
+        display: none;
+    }
+
+    .Duracion {
+        display: block;
+        grid-column: 4;
+    }
+
+    .Barra_Musica {
+        min-height: 116px;
+        padding: 12px 16px 14px;
+        display: block;
+    }
+
+    .Cancion_compacta,
+    .Volumen {
+        display: none;
+    }
+
+    .Botones_reproduccion {
+        gap: 18px;
+    }
+
+    .Progreso {
+        grid-template-columns: 38px minmax(80px, 1fr) 38px;
+        gap: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
