@@ -97,16 +97,16 @@ svg {
 }
 
 .Reproductor {
-    width: min(var(--page-max-width), calc(100% - 32px));
-    height: calc(100vh - 32px);
-    height: calc(100svh - 32px);
-    margin: 16px auto;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    margin: 0;
     display: grid;
     grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.75fr);
     grid-template-rows: 72px minmax(0, 1fr) auto;
     overflow: hidden;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-cards);
+    border: 0;
+    border-radius: 0;
     background: rgba(0, 0, 0, 0.76);
     backdrop-filter: blur(36px);
 }
@@ -194,6 +194,13 @@ svg {
 }
 
 .Boton_fantasma:hover {
+    color: var(--color-ink);
+    border-color: var(--color-haze);
+    background: var(--color-haze);
+}
+
+.Boton_fantasma[aria-pressed="true"],
+.Boton_icono[aria-pressed="true"] {
     color: var(--color-ink);
     border-color: var(--color-haze);
     background: var(--color-haze);
@@ -298,6 +305,18 @@ svg {
 .Accion_cancion {
     color: var(--color-muted);
     font-size: 13px;
+}
+
+.Cancion.esta-sonando .Accion_cancion {
+    color: currentColor;
+    font-size: 0;
+}
+
+.Cancion.esta-sonando .Accion_cancion::before {
+    content: "▮ ▮ ▮";
+    font-size: 9px;
+    letter-spacing: -2px;
+    animation: sonido 800ms ease-in-out infinite alternate;
 }
 
 .Cancion_activa .Numero,
@@ -513,6 +532,45 @@ svg {
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+}
+
+.Portada[data-theme="humo"] {
+    color: var(--color-whiteout);
+    background: #202326;
+}
+
+.Portada[data-theme="humo"] .Portada_esfera {
+    background: #8ea2b9;
+}
+
+.Portada[data-theme="claro"] {
+    background: #d8dde2;
+}
+
+.Portada[data-theme="claro"] .Portada_esfera {
+    background: #ffffff;
+}
+
+.Portada[data-theme="tinta"] {
+    color: var(--color-whiteout);
+    background: #0b0b0c;
+}
+
+.Portada[data-theme="tinta"] .Portada_esfera {
+    background: var(--color-twilight-blue);
+}
+
+.Portada[data-theme="blanco"] .Portada_esfera {
+    background: #b8cce5;
+}
+
+.Portada[data-theme="noche"] {
+    color: var(--color-whiteout);
+    background: #18263a;
+}
+
+.Portada[data-theme="noche"] .Portada_esfera {
+    background: #426188;
 }
 
 .Informacion_actual {
@@ -761,8 +819,8 @@ input:focus-visible {
 
     .Reproductor {
         height: auto;
-        min-height: calc(100svh - 24px);
-        margin-block: 12px;
+        min-height: 100svh;
+        margin: 0;
         display: flex;
         flex-direction: column;
         overflow: visible;

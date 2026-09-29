@@ -1,3 +1,5 @@
+Cristopher Leonardo Ramos Ramirez
+
 2. Reproductor de música
 Complejidad: Media
 Crea un reproductor musical usando archivos de audio incluidos en el proyecto o música libre de derechos.
@@ -21,3 +23,16 @@ Código ordenado y explicación	10
 URL pública funcional	10
 BD/Login	20
 Total	100
+
+## Audio incluido
+
+La carpeta `Musica` contiene seis pistas ambientales originales en formato WAV creadas para esta demostración. Se pueden sustituir por otros archivos conservando los nombres o actualizando la propiedad `archivo` del catálogo en `reproductor.js`.
+
+## Controles implementados
+
+- Selección directa desde la lista.
+- Reproducir, pausar, anterior y siguiente.
+- Modo aleatorio y cambio automático al finalizar.
+- Barra de progreso interactiva y control de volumen.
+- Favoritos y volumen guardados en el almacenamiento local del navegador.
+- Barra espaciadora para reproducir o pausar cuando el foco no está en otro control.

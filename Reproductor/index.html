@@ -22,7 +22,7 @@
         </a>
 
         <div class="Cabecera_acciones">
-            <span class="Estado_sesion">Sesión local</span>
+            <span class="Estado_sesion" id="EstadoReproductor" aria-live="polite">Listo para reproducir</span>
             <button class="Boton_fantasma" type="button">Iniciar sesión</button>
         </div>
     </header>
@@ -58,8 +58,8 @@
                         <small>Lumen Vale</small>
                     </span>
                     <span class="Album">Cloud Studies</span>
-                    <span class="Duracion">04:12</span>
-                    <span class="Indicador_sonido" aria-label="Reproduciendo"><i></i><i></i><i></i></span>
+                    <span class="Duracion">00:18</span>
+                    <span class="Accion_cancion" aria-hidden="true">•••</span>
                 </button>
             </li>
             <li>
@@ -71,7 +71,7 @@
                         <small>Orin Grey</small>
                     </span>
                     <span class="Album">Open Skies</span>
-                    <span class="Duracion">03:48</span>
+                    <span class="Duracion">00:20</span>
                     <span class="Accion_cancion" aria-hidden="true">•••</span>
                 </button>
             </li>
@@ -84,7 +84,7 @@
                         <small>Nora Field</small>
                     </span>
                     <span class="Album">Soft Geometry</span>
-                    <span class="Duracion">05:06</span>
+                    <span class="Duracion">00:22</span>
                     <span class="Accion_cancion" aria-hidden="true">•••</span>
                 </button>
             </li>
@@ -97,7 +97,7 @@
                         <small>North/West</small>
                     </span>
                     <span class="Album">Quiet Motion</span>
-                    <span class="Duracion">03:31</span>
+                    <span class="Duracion">00:19</span>
                     <span class="Accion_cancion" aria-hidden="true">•••</span>
                 </button>
             </li>
@@ -110,7 +110,7 @@
                         <small>Aster Club</small>
                     </span>
                     <span class="Album">Frequency</span>
-                    <span class="Duracion">04:27</span>
+                    <span class="Duracion">00:21</span>
                     <span class="Accion_cancion" aria-hidden="true">•••</span>
                 </button>
             </li>
@@ -123,7 +123,7 @@
                         <small>Velvet Hours</small>
                     </span>
                     <span class="Album">Blue Evening</span>
-                    <span class="Duracion">04:54</span>
+                    <span class="Duracion">00:23</span>
                     <span class="Accion_cancion" aria-hidden="true">•••</span>
                 </button>
             </li>
@@ -140,32 +140,32 @@
             </button>
         </div>
 
-        <div class="Portada" role="img" aria-label="Portada abstracta de Midnight Glass">
+        <div class="Portada" id="PortadaActual" data-theme="azul" role="img" aria-label="Portada abstracta de Midnight Glass">
             <span class="Portada_orbita"></span>
             <span class="Portada_esfera"></span>
             <span class="Portada_nombre">AIR</span>
-            <small>Cloud Studies · 2026</small>
+            <small id="PortadaMeta">Cloud Studies · 2026</small>
         </div>
 
         <div class="Informacion_actual">
-            <p class="Etiqueta">Cloud Studies</p>
+            <p class="Etiqueta" id="AlbumActual">Cloud Studies</p>
             <h2 id="TituloActual">Midnight Glass</h2>
-            <p>Lumen Vale</p>
+            <p id="ArtistaActual">Lumen Vale</p>
         </div>
 
         <dl class="Metadatos">
-            <div><dt>Año</dt><dd>2026</dd></div>
-            <div><dt>Género</dt><dd>Ambient</dd></div>
-            <div><dt>Duración</dt><dd>04:12</dd></div>
+            <div><dt>Año</dt><dd id="AnoActual">2026</dd></div>
+            <div><dt>Género</dt><dd id="GeneroActual">Ambient</dd></div>
+            <div><dt>Duración</dt><dd id="DuracionActual">00:18</dd></div>
         </dl>
     </aside>
 
     <nav class="Barra_Musica" aria-label="Controles del reproductor">
         <div class="Cancion_compacta">
-            <span class="Mini_portada Mini_portada--azul" aria-hidden="true"><i></i></span>
+            <span class="Mini_portada Mini_portada--azul" id="PortadaCompacta" aria-hidden="true"><i></i></span>
             <span>
-                <strong>Midnight Glass</strong>
-                <small>Lumen Vale</small>
+                <strong id="TituloCompacto">Midnight Glass</strong>
+                <small id="ArtistaCompacto">Lumen Vale</small>
             </span>
         </div>
 
@@ -184,10 +184,10 @@
             </div>
 
             <div class="Progreso">
-                <time id="TiempoActual" datetime="PT1M24S">01:24</time>
+                <time id="TiempoActual" datetime="PT0S">00:00</time>
                 <label class="Solo_lectores" for="BarraProgreso">Progreso de la canción</label>
-                <input id="BarraProgreso" type="range" min="0" max="252" value="84" aria-valuetext="1 minuto 24 segundos de 4 minutos 12 segundos">
-                <time id="TiempoTotal" datetime="PT4M12S">04:12</time>
+                <input id="BarraProgreso" type="range" min="0" max="18" value="0" aria-valuetext="0 segundos de 18 segundos">
+                <time id="TiempoTotal" datetime="PT18S">00:18</time>
             </div>
         </div>
 
