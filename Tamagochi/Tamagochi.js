@@ -204,3 +204,166 @@ if (typeof module !== "undefined" && module.exports) {
 if (typeof window !== "undefined") {
     window.JuegoTamagochi = JuegoTamagochi;
 }
+
+if (typeof document !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+        const elementos = {
+            nombre: document.querySelector("#NombreMascota"),
+            hora: document.querySelector("#Hora"),
+            mensaje: document.querySelector("#Mensaje"),
+            evento: document.querySelector("#Evento"),
+            escenario: document.querySelector("#Escenario"),
+            fantasma: document.querySelector("#Fantasma"),
+            alimentar: document.querySelector("#Alimentar"),
+            jugar: document.querySelector("#Jugar"),
+            duchar: document.querySelector("#Duchar"),
+            formulario: document.querySelector("#FormularioInicio"),
+            nombreInput: document.querySelector("#NombreInput"),
+            modalInicio: document.querySelector("#ModalInicio"),
+            modalResumen: document.querySelector("#ModalResumen"),
+            reiniciar: document.querySelector("#Reiniciar")
+        };
+
+        const indicadores = {
+            hambre: {
+                texto: document.querySelector("#TextoHambre"),
+                nivel: document.querySelector("#NivelHambre")
+            },
+            diversion: {
+                texto: document.querySelector("#TextoDiversion"),
+                nivel: document.querySelector("#NivelDiversion")
+            },
+            higiene: {
+                texto: document.querySelector("#TextoHigiene"),
+                nivel: document.querySelector("#NivelHigiene")
+            },
+            felicidad: {
+                texto: document.querySelector("#TextoFelicidad"),
+                nivel: document.querySelector("#NivelFelicidad")
+            }
+        };
+
+        let juego = null;
+        let temporizador = null;
+        let resumenProgramado = false;
+
+        const descripciones = {
+            hambre: ["Muy hambriento", "Con hambre", "Satisfecho"],
+            diversion: ["Aburrido", "Quiere jugar", "Entretenido"],
+            higiene: ["Necesita baño", "Algo sucio", "Muy limpio"],
+            felicidad: ["Triste", "Animado", "Muy feliz"]
+        };
+
+        function descripcionDe(tipo, valor) {
+            if (valor <= 25) return descripciones[tipo][0];
+            if (valor <= 60) return descripciones[tipo][1];
+            return descripciones[tipo][2];
+        }
+
+        function actualizarIndicador(tipo, valor) {
+            const indicador = indicadores[tipo];
+            indicador.texto.textContent = descripcionDe(tipo, valor);
+            indicador.nivel.style.setProperty("--nivel", `${valor}%`);
+            indicador.nivel.dataset.estado = valor <= 25 ? "peligro" : valor <= 60 ? "medio" : "bien";
+            indicador.nivel.parentElement.setAttribute("aria-label", `${tipo} al ${valor}%`);
+        }
+
+        function actualizarInterfaz() {
+            if (!juego) return;
+
+            const { estado } = juego;
+            elementos.nombre.textContent = estado.nombre;
+            elementos.hora.textContent = `${String(estado.hora).padStart(2, "0")}:00`;
+            elementos.mensaje.textContent = estado.mensaje;
+
+            Object.entries(estado.necesidades).forEach(([tipo, valor]) => {
+                actualizarIndicador(tipo, valor);
+            });
+
+            if (estado.eventoPendiente) {
+                elementos.evento.textContent = estado.eventoPendiente === "jugar"
+                    ? "Evento: quiere jugar 🎾"
+                    : "Evento: necesita un baño 🧼";
+                elementos.evento.classList.remove("oculto");
+            } else {
+                elementos.evento.classList.add("oculto");
+            }
+
+            elementos.escenario.classList.toggle("es-fantasma", estado.fantasma);
+            elementos.fantasma.classList.toggle("oculto", !estado.fantasma);
+
+            [elementos.alimentar, elementos.jugar, elementos.duchar].forEach((boton) => {
+                boton.disabled = estado.terminado;
+            });
+
+            if (estado.terminado && !resumenProgramado) {
+                resumenProgramado = true;
+                clearInterval(temporizador);
+                setTimeout(mostrarResumen, estado.fantasma ? 1000 : 450);
+            }
+        }
+
+        function mostrarResumen() {
+            if (!juego) return;
+
+            const resumen = juego.obtenerResumen();
+            document.querySelector("#EmojiResultado").textContent = juego.estado.fantasma ? "👻" : "🏆";
+            document.querySelector("#TituloResumen").textContent = juego.estado.fantasma
+                ? `${resumen.nombre} es un fantasma`
+                : "¡Día completado!";
+            document.querySelector("#TextoResultado").textContent = juego.estado.fantasma
+                ? "La partida terminó por falta o exceso de comida."
+                : `${resumen.nombre} completó sus 24 horas de cuidados.`;
+            document.querySelector("#ResumenHoras").textContent = `${resumen.horasCompletadas}/24`;
+            document.querySelector("#ResumenAlimentos").textContent = resumen.alimentos;
+            document.querySelector("#ResumenJuegos").textContent = resumen.juegos;
+            document.querySelector("#ResumenBanos").textContent = resumen.baños;
+            document.querySelector("#ResumenEventos").textContent = resumen.eventosAtendidos;
+            document.querySelector("#ResumenFelicidad").textContent = `${resumen.felicidadFinal}%`;
+            elementos.modalResumen.classList.remove("oculto");
+        }
+
+        function iniciarJuego(evento) {
+            evento.preventDefault();
+            juego = new JuegoTamagochi(elementos.nombreInput.value);
+            window.juegoActual = juego;
+            resumenProgramado = false;
+            elementos.modalInicio.classList.add("oculto");
+            elementos.modalResumen.classList.add("oculto");
+            actualizarInterfaz();
+            temporizador = setInterval(() => {
+                juego.avanzarHora();
+                actualizarInterfaz();
+            }, 6000);
+        }
+
+        function reiniciarJuego() {
+            clearInterval(temporizador);
+            juego = null;
+            window.juegoActual = null;
+            resumenProgramado = false;
+            elementos.modalResumen.classList.add("oculto");
+            elementos.modalInicio.classList.remove("oculto");
+            elementos.nombreInput.value = "";
+            elementos.nombreInput.focus();
+            [elementos.alimentar, elementos.jugar, elementos.duchar].forEach((boton) => {
+                boton.disabled = true;
+            });
+        }
+
+        elementos.formulario.addEventListener("submit", iniciarJuego);
+        elementos.alimentar.addEventListener("click", () => {
+            juego?.alimentar();
+            actualizarInterfaz();
+        });
+        elementos.jugar.addEventListener("click", () => {
+            juego?.jugar();
+            actualizarInterfaz();
+        });
+        elementos.duchar.addEventListener("click", () => {
+            juego?.duchar();
+            actualizarInterfaz();
+        });
+        elementos.reiniciar.addEventListener("click", reiniciarJuego);
+    });
+}
