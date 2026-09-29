@@ -144,8 +144,9 @@ if (typeof document !== "undefined") {
         const audio = document.querySelector("#Audio");
         const canciones = [...document.querySelectorAll("[data-track]")];
         const estado = new EstadoReproductor(CATALOGO.length);
-        const claveFavoritos = "air-player-favoritos";
-        const claveVolumen = "air-player-volumen";
+        const claveBaseFavoritos = "air-player-favoritos";
+        const claveBaseVolumen = "air-player-volumen";
+        const volumenPredeterminado = 0.72;
 
         const interfaz = {
             estado: document.querySelector("#EstadoReproductor"),
@@ -171,28 +172,48 @@ if (typeof document !== "undefined") {
             artistaCompacto: document.querySelector("#ArtistaCompacto")
         };
 
+        function crearClavePersonalizada(claveBase) {
+            const auth = window.AirPlayerAuth;
+            if (!auth) return claveBase;
+            return auth.buildUserStorageKey(claveBase, auth.getActiveSession());
+        }
+
         function leerPreferencias() {
             try {
-                const favoritos = JSON.parse(localStorage.getItem(claveFavoritos) ?? "[]");
+                estado.favoritas.clear();
+                const favoritos = JSON.parse(
+                    localStorage.getItem(crearClavePersonalizada(claveBaseFavoritos)) ?? "[]"
+                );
                 favoritos
                     .filter((indice) => Number.isInteger(indice) && indice >= 0 && indice < CATALOGO.length)
                     .forEach((indice) => estado.favoritas.add(indice));
 
-                const volumenGuardado = Number(localStorage.getItem(claveVolumen));
+                const volumenAlmacenado = localStorage.getItem(
+                    crearClavePersonalizada(claveBaseVolumen)
+                );
+                const volumenGuardado = volumenAlmacenado === null
+                    ? Number.NaN
+                    : Number(volumenAlmacenado);
                 if (Number.isFinite(volumenGuardado) && volumenGuardado >= 0 && volumenGuardado <= 1) {
                     audio.volume = volumenGuardado;
                     interfaz.volumen.value = String(Math.round(volumenGuardado * 100));
                 } else {
-                    audio.volume = Number(interfaz.volumen.value) / 100;
+                    audio.volume = volumenPredeterminado;
+                    interfaz.volumen.value = String(Math.round(volumenPredeterminado * 100));
                 }
             } catch {
-                audio.volume = Number(interfaz.volumen.value) / 100;
+                estado.favoritas.clear();
+                audio.volume = volumenPredeterminado;
+                interfaz.volumen.value = String(Math.round(volumenPredeterminado * 100));
             }
         }
 
         function guardarFavoritos() {
             try {
-                localStorage.setItem(claveFavoritos, JSON.stringify([...estado.favoritas]));
+                localStorage.setItem(
+                    crearClavePersonalizada(claveBaseFavoritos),
+                    JSON.stringify([...estado.favoritas])
+                );
             } catch {
                 interfaz.estado.textContent = "Favoritos disponibles durante esta sesión";
             }
@@ -338,7 +359,10 @@ if (typeof document !== "undefined") {
         interfaz.volumen.addEventListener("input", () => {
             audio.volume = Number(interfaz.volumen.value) / 100;
             try {
-                localStorage.setItem(claveVolumen, String(audio.volume));
+                localStorage.setItem(
+                    crearClavePersonalizada(claveBaseVolumen),
+                    String(audio.volume)
+                );
             } catch {
                 // El volumen sigue funcionando aunque el navegador bloquee el almacenamiento.
             }
@@ -355,11 +379,22 @@ if (typeof document !== "undefined") {
         });
 
         document.addEventListener("keydown", (evento) => {
+            if (document.querySelector("#PlayerApp")?.hidden) {
+                return;
+            }
+
             const elementoActivo = document.activeElement?.tagName;
             if (evento.code === "Space" && !["INPUT", "BUTTON", "A"].includes(elementoActivo)) {
                 evento.preventDefault();
                 interfaz.reproducir.click();
             }
+        });
+
+        document.addEventListener("airplayer:sessionchange", (evento) => {
+            if (!evento.detail?.session) return;
+            leerPreferencias();
+            actualizarFavorito();
+            interfaz.estado.textContent = `Biblioteca de ${evento.detail.session.name}`;
         });
 
         leerPreferencias();

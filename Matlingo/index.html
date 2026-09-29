@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matlingo</title>
+    <meta name="description" content="Aprende matemáticas paso a paso con Matlingo.">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/auth.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand" aria-label="Matlingo">
+            <span class="brand-mark" aria-hidden="true">∑</span>
+            <span>Matlingo</span>
+        </div>
+        <p class="demo-badge">Acceso local</p>
+    </header>
+
+    <main class="app-shell">
+        <section class="intro-panel" aria-labelledby="main-title">
+            <p class="eyebrow">Matemáticas a tu ritmo</p>
+            <h1 id="main-title">Cada reto te hace más fuerte.</h1>
+            <p class="intro-copy">
+                Practica desde aritmética hasta estadística con lecciones cortas,
+                progreso claro y ejercicios diseñados para aprender haciendo.
+            </p>
+            <ul class="subject-list" aria-label="Temas disponibles">
+                <li>Aritmética</li>
+                <li>Álgebra</li>
+                <li>Geometría</li>
+                <li>Cálculo</li>
+                <li>Estadística</li>
+            </ul>
+        </section>
+
+        <section id="login-view" class="auth-card" aria-labelledby="login-title">
+            <p class="eyebrow">Bienvenido</p>
+            <h2 id="login-title">Inicia tu aprendizaje</h2>
+            <p class="card-copy">
+                Esta demostración guarda tu sesión en una cookie de este navegador.
+            </p>
+
+            <form id="login-form" novalidate>
+                <div class="field">
+                    <label for="name">Tu nombre</label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        minlength="2"
+                        maxlength="40"
+                        autocomplete="name"
+                        placeholder="Ej. Andrea"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="email">Correo electrónico</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        maxlength="120"
+                        autocomplete="email"
+                        placeholder="andrea@ejemplo.com"
+                        required
+                    >
+                </div>
+
+                <label class="remember-row" for="remember">
+                    <input id="remember" name="remember" type="checkbox">
+                    <span>Mantener mi sesión durante 7 días</span>
+                </label>
+
+                <button class="primary-button" type="submit">Entrar a Matlingo</button>
+                <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <p class="privacy-note">
+                <span aria-hidden="true">●</span>
+                No se solicita ni se guarda una contraseña en esta demostración.
+            </p>
+        </section>
+
+        <section id="session-view" class="session-card" aria-labelledby="session-title" hidden>
+            <div class="profile-header">
+                <span id="profile-initial" class="profile-avatar" aria-hidden="true">M</span>
+                <div>
+                    <strong id="profile-name">Estudiante</strong>
+                    <p id="profile-email">correo@ejemplo.com</p>
+                </div>
+            </div>
+
+            <p class="eyebrow">Sesión recuperada</p>
+            <h2 id="session-title">¡Hola, <span id="welcome-name">estudiante</span>!</h2>
+            <p class="card-copy">Tu espacio está listo. Elige un tema para comenzar a practicar.</p>
+            <p id="session-type" class="session-status"></p>
+
+            <ul class="topics-preview" aria-label="Rutas de aprendizaje">
+                <li><span class="topic-icon" aria-hidden="true">+</span>Aritmética</li>
+                <li><span class="topic-icon" aria-hidden="true">x</span>Álgebra</li>
+                <li><span class="topic-icon" aria-hidden="true">△</span>Geometría</li>
+                <li><span class="topic-icon" aria-hidden="true">%</span>Estadística</li>
+            </ul>
+
+            <button id="logout-button" class="secondary-button" type="button">Cerrar sesión</button>
+            <p id="session-notice" class="session-notice" role="status" aria-live="polite" hidden></p>
+        </section>
+    </main>
+</body>
+</html>

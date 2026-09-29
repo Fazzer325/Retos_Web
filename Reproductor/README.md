@@ -30,6 +30,10 @@ La carpeta `Musica` contiene seis pistas ambientales originales en formato WAV c
 
 ## Controles implementados
 
+- Inicio de sesión local con nombre y correo mediante cookies.
+- Sesión temporal o persistente durante 7 días y restauración automática al recargar.
+- Cierre de sesión que elimina la cookie y pausa la reproducción.
+- Favoritos y volumen independientes para cada cuenta que inicia sesión.
 - Selección directa desde la lista.
 - Reproducir, pausar, anterior y siguiente.
 - Modo aleatorio y cambio automático al finalizar.

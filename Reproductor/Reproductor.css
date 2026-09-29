@@ -64,6 +64,10 @@ svg {
     stroke-linejoin: round;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 .Atmosfera {
     position: fixed;
     inset: 0;
@@ -94,6 +98,238 @@ svg {
     width: 48vw;
     height: 48vw;
     background: #3d4856;
+}
+
+.Acceso {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(420px, 0.7fr);
+    background: rgba(0, 0, 0, 0.66);
+}
+
+.Acceso_presentacion {
+    position: relative;
+    min-width: 0;
+    min-height: 100svh;
+    padding: clamp(28px, 5vw, 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-right: 1px solid var(--color-line);
+}
+
+.Marca--acceso {
+    position: relative;
+    z-index: 2;
+    align-self: flex-start;
+}
+
+.Acceso_mensaje {
+    position: relative;
+    z-index: 2;
+    width: min(680px, 92%);
+    margin: auto 0;
+    padding-block: 72px;
+}
+
+.Acceso_mensaje h1 {
+    margin: 0 0 24px;
+    font-size: clamp(48px, 6.3vw, 94px);
+    font-weight: 500;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+}
+
+.Acceso_mensaje h1 em {
+    display: block;
+    color: #7895b8;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+}
+
+.Acceso_mensaje > p:last-child {
+    max-width: 520px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.Escultura {
+    position: absolute;
+    right: -9vw;
+    bottom: -23vw;
+    width: min(58vw, 760px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    background: rgba(66, 97, 136, 0.22);
+}
+
+.Escultura_orbita {
+    position: absolute;
+    inset: 15%;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 50%;
+    transform: rotate(-18deg) scaleY(0.45);
+}
+
+.Escultura_esfera {
+    position: absolute;
+    top: 24%;
+    left: 25%;
+    width: 48%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 50%;
+    background: rgba(66, 97, 136, 0.76);
+}
+
+.Escultura strong {
+    position: absolute;
+    top: 19%;
+    right: 12%;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(72px, 11vw, 160px);
+    font-weight: 900;
+    letter-spacing: -0.1em;
+    line-height: 1;
+}
+
+.Acceso_panel {
+    min-height: 100svh;
+    padding: clamp(24px, 5vw, 72px);
+    display: grid;
+    place-items: center;
+    background: rgba(4, 5, 7, 0.58);
+}
+
+.Acceso_tarjeta {
+    width: min(100%, 460px);
+    padding: clamp(28px, 4vw, 46px);
+    border-radius: var(--radius-cards);
+    color: var(--color-ink);
+    background: var(--color-haze);
+}
+
+.Etiqueta--oscura {
+    color: rgba(27, 27, 27, 0.56);
+}
+
+.Acceso_tarjeta h2 {
+    margin: 0 0 10px;
+    font-size: clamp(32px, 3vw, 44px);
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 1;
+}
+
+.Acceso_descripcion {
+    margin: 0 0 30px;
+    color: rgba(27, 27, 27, 0.62);
+    font-weight: 400;
+}
+
+.Campo_acceso {
+    margin-bottom: 18px;
+    display: grid;
+    gap: 7px;
+}
+
+.Campo_acceso label {
+    font-size: 13px;
+}
+
+.Campo_acceso input {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 12px;
+    border: 1px solid rgba(27, 27, 27, 0.2);
+    border-radius: var(--radius-inputs);
+    outline: 0;
+    color: var(--color-ink);
+    background: var(--color-whiteout);
+}
+
+.Campo_acceso input::placeholder {
+    color: rgba(27, 27, 27, 0.4);
+}
+
+.Campo_acceso input:focus {
+    border-color: var(--color-signal-blue);
+    outline: 2px solid rgba(43, 127, 255, 0.18);
+    outline-offset: 0;
+}
+
+.Recordar_acceso {
+    margin: 4px 0 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(27, 27, 27, 0.68);
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.Recordar_acceso input {
+    width: 18px;
+    height: 18px;
+    margin: 1px 0 0;
+    accent-color: var(--color-ink);
+    flex: 0 0 auto;
+}
+
+.Boton_entrar {
+    width: 100%;
+    min-height: 50px;
+    padding: 10px 18px;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-buttons);
+    color: var(--color-whiteout);
+    cursor: pointer;
+    background: var(--color-ink);
+    transition: color 160ms ease, background 160ms ease;
+}
+
+.Boton_entrar:hover,
+.Boton_entrar:focus-visible {
+    color: var(--color-ink);
+    background: transparent;
+}
+
+.Mensaje_acceso {
+    min-height: 22px;
+    margin: 10px 0 0;
+    color: #a32929;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.Nota_privacidad {
+    margin: 18px 0 0;
+    padding-top: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    border-top: 1px solid rgba(27, 27, 27, 0.12);
+    color: rgba(27, 27, 27, 0.58);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.Nota_privacidad span {
+    width: 7px;
+    height: 7px;
+    margin-top: 5px;
+    border-radius: 50%;
+    background: var(--color-twilight-blue);
+    flex: 0 0 auto;
 }
 
 .Reproductor {
@@ -167,6 +403,49 @@ svg {
     display: flex;
     align-items: center;
     gap: 16px;
+}
+
+.Perfil_sesion {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.Perfil_inicial {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    border-radius: 50%;
+    color: var(--color-whiteout);
+    background: var(--color-twilight-blue);
+    font-size: 13px;
+}
+
+.Perfil_datos {
+    min-width: 0;
+    max-width: 150px;
+}
+
+.Perfil_datos strong,
+.Perfil_datos small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.Perfil_datos strong {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.Perfil_datos small {
+    color: var(--color-muted);
+    font-size: 10px;
+    font-weight: 400;
 }
 
 .Estado_sesion {
@@ -771,6 +1050,22 @@ input[type="range"]::-moz-range-thumb {
     border: 0;
 }
 
+.Aviso_cookie {
+    position: fixed;
+    z-index: 30;
+    top: 84px;
+    right: 18px;
+    width: min(380px, calc(100% - 36px));
+    margin: 0;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: var(--radius-buttons);
+    color: var(--color-ink);
+    background: var(--color-haze);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
@@ -784,6 +1079,14 @@ input:focus-visible {
 }
 
 @media (max-width: 1050px) {
+    .Acceso {
+        grid-template-columns: minmax(0, 1fr) minmax(380px, 0.82fr);
+    }
+
+    .Acceso_mensaje h1 {
+        font-size: clamp(46px, 6.4vw, 68px);
+    }
+
     .Reproductor {
         grid-template-columns: minmax(0, 1fr) 310px;
     }
@@ -815,6 +1118,40 @@ input:focus-visible {
 @media (max-width: 820px) {
     body {
         overflow: auto;
+    }
+
+    .Acceso {
+        min-height: 100svh;
+        grid-template-columns: 1fr;
+    }
+
+    .Acceso_presentacion {
+        min-height: 440px;
+        padding: 28px;
+        border-right: 0;
+        border-bottom: 1px solid var(--color-line);
+    }
+
+    .Acceso_mensaje {
+        width: min(620px, 90%);
+        margin: auto 0 0;
+        padding: 60px 0 22px;
+    }
+
+    .Acceso_mensaje h1 {
+        max-width: 580px;
+        font-size: clamp(44px, 10vw, 72px);
+    }
+
+    .Escultura {
+        right: -20vw;
+        bottom: -48vw;
+        width: 85vw;
+    }
+
+    .Acceso_panel {
+        min-height: auto;
+        padding: 50px 24px;
     }
 
     .Reproductor {
@@ -876,6 +1213,33 @@ input:focus-visible {
 }
 
 @media (max-width: 620px) {
+    .Acceso_presentacion {
+        min-height: 380px;
+        padding: 22px 18px;
+    }
+
+    .Acceso_mensaje {
+        width: 100%;
+        padding-bottom: 12px;
+    }
+
+    .Acceso_mensaje h1 {
+        margin-bottom: 18px;
+        font-size: clamp(39px, 13vw, 58px);
+    }
+
+    .Acceso_mensaje > p:last-child {
+        font-size: 15px;
+    }
+
+    .Acceso_panel {
+        padding: 32px 16px;
+    }
+
+    .Acceso_tarjeta {
+        padding: 28px 22px;
+    }
+
     .Reproductor {
         width: 100%;
         min-height: 100svh;
@@ -890,6 +1254,14 @@ input:focus-visible {
 
     .Estado_sesion {
         display: none;
+    }
+
+    .Perfil_datos {
+        display: none;
+    }
+
+    .Cabecera_acciones {
+        gap: 9px;
     }
 
     .Cabecera .Boton_fantasma {
