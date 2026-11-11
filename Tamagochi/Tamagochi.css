@@ -270,6 +270,9 @@ button {
     font-weight: 800;
     background: #ff6577;
     box-shadow: 0 7px 18px rgba(180, 46, 70, 0.25);
+    max-width: 92%;
+    text-align: center;
+    white-space: pre-wrap;
     animation: aparecer 300ms ease-out;
 }
 
@@ -477,84 +480,127 @@ button {
     line-height: 1.45;
 }
 
-/* Reglas del juego (debajo del campo del nombre) */
-#FormularioInicio {
-    width: min(520px, 100%);
+/* Ventana de inicio: nombre (izquierda) + reglas (derecha) */
+.Modal_tarjeta.Inicio {
+    width: min(960px, 100%);
+    padding: clamp(22px, 3.5vw, 34px);
+    display: grid;
+    grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.4fr);
+    gap: clamp(20px, 3vw, 34px);
+    align-items: center;
+    text-align: center;
+}
+
+.Inicio_formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.Inicio_formulario .Boton_principal {
+    margin-top: 2px;
 }
 
 .Reglas {
-    margin-top: 22px;
-    padding-top: 18px;
-    border-top: 2px dashed #d7deec;
+    padding-left: clamp(20px, 3vw, 34px);
+    border-left: 2px dashed #d7deec;
     text-align: left;
 }
 
 .Reglas h3 {
     margin: 0 0 12px;
-    text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
 }
 
-.Reglas details {
-    margin-bottom: 8px;
-    padding: 10px 14px;
+.Reglas_grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.Regla {
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
     border: 1px solid #e1e8f2;
-    border-radius: 14px;
-    background: #f6fafd;
-}
-
-.Reglas details[open] {
+    border-radius: 16px;
     background: #ffffff;
 }
 
-.Reglas summary {
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 800;
-    list-style-position: inside;
+.Regla_icono {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    font-size: 1.15rem;
+    background: #eef6fa;
 }
 
-.Reglas summary:focus-visible {
-    outline: 3px solid rgba(61, 202, 195, 0.5);
-    outline-offset: 3px;
-    border-radius: 6px;
+.Regla h4 {
+    margin: 2px 0 4px;
+    font-size: 0.88rem;
 }
 
-.Reglas p,
-.Reglas ul {
-    margin: 8px 0 0;
+.Regla p,
+.Regla ul {
+    margin: 0;
     color: var(--texto-suave);
-    font-size: 0.82rem;
-    line-height: 1.5;
+    font-size: 0.78rem;
+    line-height: 1.45;
 }
 
-.Reglas ul {
-    padding-left: 18px;
-}
-
-.Reglas li + li {
-    margin-top: 3px;
-}
-
-.Reglas strong {
+.Regla b {
     color: var(--azul-oscuro);
 }
 
-.Reglas_peligro {
-    border-color: #ffc9cf !important;
-    background: #fff5f6 !important;
+.Regla_peligro {
+    margin-top: 10px;
+    align-items: center;
+    border-color: #ffc9cf;
+    background: #fff5f6;
+}
+
+.Regla_peligro .Regla_icono {
+    background: #ffe3e6;
+}
+
+.Regla_peligro ul {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+}
+
+.Regla_peligro li {
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #ffd7db;
 }
 
 .Reglas_colores {
+    margin: 12px 0 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+    color: var(--texto-suave);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.Reglas_colores span {
+    display: inline-flex;
     align-items: center;
-    gap: 4px 8px;
+    gap: 6px;
 }
 
 .Punto {
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     display: inline-block;
     border-radius: 50%;
 }
@@ -569,6 +615,28 @@ button {
 
 .Punto.peligro {
     background: linear-gradient(90deg, #ff5e6c, #ff8b78);
+}
+
+@media (max-width: 760px) {
+    .Modal_tarjeta.Inicio {
+        grid-template-columns: 1fr;
+    }
+
+    .Reglas {
+        padding: 18px 0 0;
+        border-left: 0;
+        border-top: 2px dashed #d7deec;
+    }
+
+    .Reglas h3 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .Reglas_grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .Resumen > p:not(.Modal_etiqueta) {
