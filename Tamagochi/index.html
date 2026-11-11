@@ -109,6 +109,81 @@
         <input id="NombreInput" name="nombre" type="text" maxlength="18" placeholder="Ejemplo: Momo" required autocomplete="off">
         <button class="Boton_principal" type="submit">Comenzar el día</button>
         <small>El día dura 24 horas simuladas. Cada hora avanza en 6 segundos.</small>
+
+        <section class="Reglas" aria-labelledby="TituloReglas">
+            <h3 id="TituloReglas">📜 Reglas y cómo se juega</h3>
+
+            <details open>
+                <summary>🎯 Objetivo</summary>
+                <p>Cuida a tu mascota durante <strong>24 horas simuladas</strong> sin que se convierta en fantasma. Al terminar el día verás un resumen con todos los cuidados que le diste.</p>
+            </details>
+
+            <details open>
+                <summary>⏱️ El reloj</summary>
+                <ul>
+                    <li>El día empieza a las <strong>00:00</strong> y termina a las <strong>24:00</strong>.</li>
+                    <li>Cada <strong>6 segundos reales</strong> pasa <strong>1 hora</strong> simulada (el día completo dura 2 minutos y 24 segundos).</li>
+                </ul>
+            </details>
+
+            <details open>
+                <summary>📊 Indicadores</summary>
+                <p>Todos empiezan en <strong>80%</strong> y bajan solos cada hora:</p>
+                <ul>
+                    <li><strong>🍗 Hambre:</strong> baja 6% por hora. Cuanto más alta, más llena está la mascota.</li>
+                    <li><strong>🎾 Diversión:</strong> baja 4% por hora.</li>
+                    <li><strong>🧼 Higiene:</strong> baja 3% por hora.</li>
+                    <li><strong>😊 Felicidad:</strong> es el promedio de hambre, diversión e higiene.</li>
+                </ul>
+                <p class="Reglas_colores">
+                    <span class="Punto bien"></span> más de 60% bien
+                    <span class="Punto medio"></span> 26–60% regular
+                    <span class="Punto peligro"></span> 25% o menos peligro
+                </p>
+            </details>
+
+            <details open>
+                <summary>🕹️ Botones</summary>
+                <ul>
+                    <li><strong>Alimentar:</strong> sube el hambre +30%.</li>
+                    <li><strong>Jugar:</strong> sube la diversión +25%.</li>
+                    <li><strong>Duchar:</strong> sube la higiene +30%.</li>
+                </ul>
+                <p>Ningún indicador puede pasar de 100% ni bajar de 0%.</p>
+            </details>
+
+            <details open>
+                <summary>🍽️ Horarios de comida</summary>
+                <ul>
+                    <li>A las <strong>06:00, 12:00 y 18:00</strong> la mascota pide comida.</li>
+                    <li>Tienes hasta el siguiente horario para darle de comer. Si no lo haces, cuenta como <strong>comida olvidada</strong>.</li>
+                    <li>Si das de comer <strong>sin que lo pida</strong>, cuenta como <strong>comida extra</strong>.</li>
+                </ul>
+            </details>
+
+            <details open>
+                <summary>🎲 Eventos aleatorios</summary>
+                <ul>
+                    <li>Cada <strong>3 horas</strong> puede aparecer un evento (45% de probabilidad): <em>quiere jugar 🎾</em> o <em>necesita un baño 🧼</em>.</li>
+                    <li>Atiéndelo con el botón correcto (Jugar o Duchar) para sumarlo a los eventos atendidos.</li>
+                    <li>Si lo ignoras hasta el siguiente evento, ese indicador baja <strong>−12%</strong> de golpe.</li>
+                </ul>
+            </details>
+
+            <details open class="Reglas_peligro">
+                <summary>👻 ¿Cuándo se convierte en fantasma?</summary>
+                <ul>
+                    <li>Si <strong>olvidas 2 horarios de comida</strong>.</li>
+                    <li>Si le das <strong>3 comidas extra</strong> (comer de más).</li>
+                </ul>
+                <p>Si eso pasa, la partida termina antes de tiempo y se muestra el resumen.</p>
+            </details>
+
+            <details open>
+                <summary>🏆 Fin del día</summary>
+                <p>Al llegar a las 24:00 aparece el resumen: horas completadas, alimentos, juegos, baños, eventos atendidos y felicidad final. Pulsa <strong>Jugar otra vez</strong> para empezar con una nueva mascota.</p>
+            </details>
+        </section>
     </form>
 </div>
 

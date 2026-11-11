@@ -477,6 +477,100 @@ button {
     line-height: 1.45;
 }
 
+/* Reglas del juego (debajo del campo del nombre) */
+#FormularioInicio {
+    width: min(520px, 100%);
+}
+
+.Reglas {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 2px dashed #d7deec;
+    text-align: left;
+}
+
+.Reglas h3 {
+    margin: 0 0 12px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.Reglas details {
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    border: 1px solid #e1e8f2;
+    border-radius: 14px;
+    background: #f6fafd;
+}
+
+.Reglas details[open] {
+    background: #ffffff;
+}
+
+.Reglas summary {
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 800;
+    list-style-position: inside;
+}
+
+.Reglas summary:focus-visible {
+    outline: 3px solid rgba(61, 202, 195, 0.5);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+.Reglas p,
+.Reglas ul {
+    margin: 8px 0 0;
+    color: var(--texto-suave);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.Reglas ul {
+    padding-left: 18px;
+}
+
+.Reglas li + li {
+    margin-top: 3px;
+}
+
+.Reglas strong {
+    color: var(--azul-oscuro);
+}
+
+.Reglas_peligro {
+    border-color: #ffc9cf !important;
+    background: #fff5f6 !important;
+}
+
+.Reglas_colores {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+}
+
+.Punto {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.Punto.bien {
+    background: linear-gradient(90deg, var(--turquesa), #7ade8a);
+}
+
+.Punto.medio {
+    background: linear-gradient(90deg, #ffc342, #ffdc6c);
+}
+
+.Punto.peligro {
+    background: linear-gradient(90deg, #ff5e6c, #ff8b78);
+}
+
 .Resumen > p:not(.Modal_etiqueta) {
     margin: -8px 0 18px;
     color: var(--texto-suave);
